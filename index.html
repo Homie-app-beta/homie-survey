@@ -1,0 +1,1280 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Ayúdanos a construir Homie mejor con 3 minutos de tu tiempo">
+  <title>homie · Cuestionario de validación</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,200;9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:  #0C1F3F;
+      --blue:  #1A6FBF;
+      --blue2: #155fa0;
+      --ice:   #EFF6FF;
+      --warm:  #F7F5F1;
+      --mid:   #888888;
+      --border:#E2E8F0;
+      --white: #ffffff;
+      --ok:    #38A169;
+      --font:  'DM Sans', sans-serif;
+      --w:     580px;
+      --r:     12px;
+      --rs:    8px;
+      --sh:    0 2px 8px rgba(12,31,63,.07), 0 8px 24px rgba(12,31,63,.05);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font);
+      background: var(--warm);
+      color: var(--navy);
+      min-height: 100vh;
+      font-size: 15px;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── HEADER ─────────────────────────────── */
+    .hdr {
+      background: var(--navy);
+      position: sticky;
+      top: 0;
+      z-index: 200;
+    }
+    .hdr-inner {
+      max-width: var(--w);
+      margin: 0 auto;
+      padding: 13px 24px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      flex-shrink: 0;
+      text-decoration: none;
+    }
+    .logo svg { width: 26px; height: 26px; }
+    .logo-wm {
+      font-size: 17px;
+      font-weight: 200;
+      color: #fff;
+      letter-spacing: -.6px;
+    }
+    .prog-wrap { flex: 1; }
+    .prog-bar {
+      height: 3px;
+      background: rgba(255,255,255,.14);
+      border-radius: 2px;
+      overflow: hidden;
+      margin-bottom: 4px;
+    }
+    .prog-fill {
+      height: 100%;
+      background: var(--blue);
+      border-radius: 2px;
+      width: 0%;
+      transition: width .45s ease;
+    }
+    .prog-lbl {
+      font-size: 11px;
+      color: rgba(255,255,255,.4);
+      text-align: right;
+      letter-spacing: .03em;
+    }
+
+    /* ── MAIN ───────────────────────────────── */
+    .main {
+      min-height: calc(100vh - 52px);
+      padding: 28px 16px 80px;
+    }
+    .card-wrap {
+      max-width: var(--w);
+      margin: 0 auto;
+    }
+
+    /* ── STEPS ──────────────────────────────── */
+    .step { display: none; }
+    .step.active { display: block; animation: sIn .28s ease-out both; }
+    .step.leaving { display: block; animation: sOut .18s ease-in forwards; pointer-events: none; }
+
+    @keyframes sIn  { from { opacity:0; transform:translateY(14px); } to { opacity:1; transform:translateY(0); } }
+    @keyframes sOut { from { opacity:1; transform:translateY(0);    } to { opacity:0; transform:translateY(-10px); } }
+
+    /* ── WELCOME ────────────────────────────── */
+    .wcard {
+      background: var(--white);
+      border-radius: var(--r);
+      box-shadow: var(--sh);
+      padding: 44px 36px;
+      text-align: center;
+    }
+    .wlogo { margin-bottom: 20px; }
+    .wlogo svg { width: 52px; height: 52px; display: block; margin: 0 auto 8px; }
+    .wwm {
+      font-size: 30px;
+      font-weight: 200;
+      color: var(--navy);
+      letter-spacing: -1.2px;
+      display: block;
+    }
+    .wtitle {
+      font-size: 19px;
+      font-weight: 400;
+      color: var(--navy);
+      margin-bottom: 6px;
+      line-height: 1.4;
+    }
+    .wsub {
+      font-size: 14px;
+      color: var(--mid);
+      margin-bottom: 28px;
+      line-height: 1.65;
+    }
+    .badges {
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 32px;
+    }
+    .badge {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--navy);
+      background: var(--ice);
+      border-radius: 20px;
+      padding: 4px 13px;
+    }
+
+    /* ── QUESTION CARD ──────────────────────── */
+    .qcard {
+      background: var(--white);
+      border-radius: var(--r);
+      box-shadow: var(--sh);
+      padding: 30px 28px 24px;
+    }
+    .stag {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: var(--blue);
+      margin-bottom: 9px;
+    }
+    .qtext {
+      font-size: 21px;
+      font-weight: 400;
+      line-height: 1.35;
+      color: var(--navy);
+      margin-bottom: 6px;
+    }
+    .qsub {
+      font-size: 14px;
+      color: var(--mid);
+      line-height: 1.55;
+      margin-bottom: 0;
+    }
+    .hint {
+      font-size: 12px;
+      color: var(--mid);
+      margin-top: 14px;
+      margin-bottom: -4px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .cnt-badge {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--blue);
+      background: var(--ice);
+      border-radius: 12px;
+      padding: 2px 9px;
+      transition: opacity .2s;
+    }
+
+    /* ── OPTION CARDS ───────────────────────── */
+    .opts { display: flex; flex-direction: column; gap: 8px; margin-top: 18px; }
+
+    .oc {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      padding: 13px 15px;
+      border: 1.5px solid var(--border);
+      border-radius: var(--rs);
+      cursor: pointer;
+      transition: border-color .14s, background .14s;
+      user-select: none;
+      background: var(--white);
+      position: relative;
+    }
+    .oc:hover { border-color: var(--blue); background: var(--ice); }
+    .oc.sel   { border-color: var(--blue); background: var(--ice); }
+    .oc.dis   { opacity: .38; pointer-events: none; }
+    .oc input { display: none; }
+
+    .ind {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      border: 1.5px solid var(--border);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: border-color .14s, background .14s;
+      position: relative;
+    }
+    .oc.chk .ind { border-radius: 5px; }
+    .oc.sel .ind  { background: var(--blue); border-color: var(--blue); }
+
+    .ind::after {
+      content: '';
+      display: block;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: transparent;
+      transition: background .14s;
+    }
+    .oc.sel:not(.chk) .ind::after { background: #fff; }
+    .oc.chk.sel .ind::after {
+      width: 5px;
+      height: 9px;
+      border-radius: 0;
+      background: transparent;
+      border-right: 2px solid #fff;
+      border-bottom: 2px solid #fff;
+      transform: rotate(45deg) translate(-1px,-1px);
+    }
+
+    .ol { font-size: 15px; color: var(--navy); flex: 1; line-height: 1.4; }
+    .ol small { display: block; font-size: 12.5px; color: var(--mid); margin-top: 1px; }
+
+    /* ── CONCEPT BOX ────────────────────────── */
+    .concept {
+      background: var(--navy);
+      border-radius: var(--rs);
+      padding: 18px 20px;
+      margin-top: 18px;
+      margin-bottom: 20px;
+    }
+    .concept-tag {
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      color: var(--blue);
+      margin-bottom: 8px;
+      display: block;
+    }
+    .concept p {
+      font-size: 14.5px;
+      color: rgba(255,255,255,.88);
+      line-height: 1.65;
+    }
+    .concept strong { color: #fff; font-weight: 500; }
+
+    /* ── STARS ──────────────────────────────── */
+    .stars-wrap { margin-top: 16px; }
+    .stars-row {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 6px;
+    }
+    .star {
+      cursor: pointer;
+      width: 34px;
+      height: 34px;
+      transition: transform .1s;
+    }
+    .star:hover { transform: scale(1.12); }
+    .star path { fill: var(--border); transition: fill .12s; }
+    .star.on path, .star.hov path { fill: #F6AD55; }
+    .star-lbl { font-size: 13px; color: var(--mid); min-height: 18px; transition: color .15s; }
+
+    /* ── TEXT INPUTS ────────────────────────── */
+    .tinp, .tarea {
+      width: 100%;
+      font-family: var(--font);
+      font-size: 15px;
+      color: var(--navy);
+      background: var(--warm);
+      border: 1.5px solid var(--border);
+      border-radius: var(--rs);
+      padding: 13px 15px;
+      outline: none;
+      transition: border-color .14s, background .14s;
+      margin-top: 16px;
+      resize: none;
+    }
+    .tinp:focus, .tarea:focus { border-color: var(--blue); background: #fff; }
+    .tinp::placeholder, .tarea::placeholder { color: var(--mid); }
+    .tarea { min-height: 110px; line-height: 1.55; }
+
+    .sub-inp { margin-top: 8px; display: none; }
+    .sub-inp.vis { display: block; }
+
+    /* ── SCALE P7 ───────────────────────────── */
+    .scale-opts { display: flex; flex-direction: column; gap: 8px; margin-top: 18px; }
+    .soc {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 15px;
+      border: 1.5px solid var(--border);
+      border-radius: var(--rs);
+      cursor: pointer;
+      transition: border-color .14s, background .14s;
+      user-select: none;
+    }
+    .soc:hover { border-color: var(--blue); background: var(--ice); }
+    .soc.sel   { border-color: var(--blue); background: var(--ice); }
+    .snum {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: var(--border);
+      color: var(--mid);
+      font-size: 14px;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: background .14s, color .14s;
+    }
+    .soc.sel .snum { background: var(--blue); color: #fff; }
+    .stxt { flex: 1; font-size: 15px; color: var(--navy); }
+    .stxt small { font-size: 12.5px; color: var(--mid); display: block; margin-top: 1px; }
+
+    /* ── DIVIDER ────────────────────────────── */
+    .div { height: 1px; background: var(--border); margin: 20px 0; }
+    .sublbl {
+      font-size: 12px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: .07em;
+      color: var(--mid);
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    /* ── NAV BUTTONS ────────────────────────── */
+    .nav {
+      display: flex;
+      gap: 10px;
+      margin-top: 22px;
+      align-items: center;
+    }
+    .nav.col { flex-direction: column; }
+
+    .btn-n {
+      background: var(--blue);
+      color: #fff;
+      border: none;
+      border-radius: var(--rs);
+      padding: 13px 22px;
+      font-family: var(--font);
+      font-size: 15px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background .14s;
+      flex: 1;
+      letter-spacing: -.01em;
+    }
+    .btn-n:hover { background: var(--blue2); }
+    .btn-n:disabled { background: var(--border); color: var(--mid); cursor: not-allowed; }
+
+    .btn-b {
+      background: transparent;
+      color: var(--mid);
+      border: 1.5px solid var(--border);
+      border-radius: var(--rs);
+      padding: 12px 16px;
+      font-family: var(--font);
+      font-size: 14px;
+      cursor: pointer;
+      transition: border-color .14s, color .14s;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .btn-b:hover { border-color: var(--navy); color: var(--navy); }
+
+    .btn-skip {
+      background: none;
+      border: none;
+      font-family: var(--font);
+      font-size: 14px;
+      color: var(--mid);
+      cursor: pointer;
+      text-align: center;
+      padding: 8px;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+    .btn-skip:hover { color: var(--navy); }
+
+    .btn-big {
+      background: var(--blue);
+      color: #fff;
+      border: none;
+      border-radius: var(--rs);
+      padding: 15px 28px;
+      font-family: var(--font);
+      font-size: 16px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background .14s;
+      width: 100%;
+      letter-spacing: -.01em;
+    }
+    .btn-big:hover { background: var(--blue2); }
+
+    /* ── THANKS SCREENS ─────────────────────── */
+    .tcard {
+      background: var(--white);
+      border-radius: var(--r);
+      box-shadow: var(--sh);
+      padding: 48px 36px;
+      text-align: center;
+    }
+    .ticon {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: var(--ice);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 22px;
+    }
+    .ticon svg { width: 28px; height: 28px; }
+    .ttitle { font-size: 24px; font-weight: 400; color: var(--navy); margin-bottom: 10px; letter-spacing: -.3px; }
+    .tsub { font-size: 15px; color: var(--mid); line-height: 1.65; max-width: 360px; margin: 0 auto; }
+    .temail {
+      display: inline-block;
+      background: var(--ice);
+      color: var(--blue);
+      font-weight: 500;
+      padding: 3px 12px;
+      border-radius: 5px;
+      margin-top: 12px;
+      font-size: 14px;
+    }
+    .tpoints {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-top: 24px;
+      text-align: left;
+    }
+    .tpoint {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 14px;
+      color: var(--navy);
+    }
+    .tpoint-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--blue);
+      flex-shrink: 0;
+    }
+
+    /* ── EMAIL INPUT ────────────────────────── */
+    .einp {
+      width: 100%;
+      font-family: var(--font);
+      font-size: 15px;
+      color: var(--navy);
+      background: var(--warm);
+      border: 1.5px solid var(--border);
+      border-radius: var(--rs);
+      padding: 13px 15px;
+      outline: none;
+      transition: border-color .14s, background .14s;
+      margin-top: 16px;
+    }
+    .einp:focus { border-color: var(--blue); background: #fff; }
+    .einp::placeholder { color: var(--mid); }
+
+    /* ── FOOTER ─────────────────────────────── */
+    .ftr {
+      text-align: center;
+      padding: 18px;
+      font-size: 12px;
+      color: var(--mid);
+    }
+
+    /* ── RESPONSIVE ─────────────────────────── */
+    @media (max-width: 520px) {
+      .main { padding: 0 0 60px; }
+      .qcard, .wcard, .tcard { border-radius: 0; padding: 26px 18px 20px; }
+      .qtext { font-size: 19px; }
+      .hdr-inner { padding: 11px 16px; }
+      .wcard { padding: 36px 20px; }
+      .tcard { padding: 40px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── HEADER ───────────────────────────────── -->
+<header class="hdr">
+  <div class="hdr-inner">
+    <a class="logo" href="#">
+      <svg viewBox="0 0 56 61" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd" d="M28 4 L50 23 Q53 26 53 29 L53 54 Q53 57 50 57 L6 57 Q3 57 3 54 L3 29 Q3 26 6 23 Z M19 57 L19 40 A9 9 0 0 1 37 40 L37 57 Z" fill="white"/>
+      </svg>
+      <span class="logo-wm">homie</span>
+    </a>
+    <div class="prog-wrap">
+      <div class="prog-bar"><div class="prog-fill" id="pFill"></div></div>
+      <div class="prog-lbl" id="pLbl"></div>
+    </div>
+  </div>
+</header>
+
+<!-- ── MAIN ─────────────────────────────────── -->
+<main class="main">
+<div class="card-wrap">
+
+<!-- ══ WELCOME ══════════════════════════════ -->
+<div class="step active" id="step-welcome" data-p="0">
+  <div class="wcard">
+    <div class="wlogo">
+      <svg viewBox="0 0 56 61" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd" d="M28 4 L50 23 Q53 26 53 29 L53 54 Q53 57 50 57 L6 57 Q3 57 3 54 L3 29 Q3 26 6 23 Z M19 57 L19 40 A9 9 0 0 1 37 40 L37 57 Z" fill="#0C1F3F"/>
+      </svg>
+      <span class="wwm">homie</span>
+    </div>
+    <p class="wtitle">Ayúdanos a construir<br>la mejor app de gestión de pisos</p>
+    <p class="wsub">Estamos validando Homie antes de construirla.<br>Tu opinión como propietario vale más que cualquier análisis de mercado.</p>
+    <div class="badges">
+      <span class="badge">3 minutos</span>
+      <span class="badge">100% anónimo</span>
+      <span class="badge">Sin registro</span>
+    </div>
+    <button class="btn-big" onclick="goNext('welcome')">Empezar &rarr;</button>
+  </div>
+</div>
+
+<!-- ══ P1 — Cuántos pisos ═══════════════════ -->
+<div class="step" id="step-p1" data-p="8">
+  <div class="qcard">
+    <span class="stag">Perfil · 1 de 3</span>
+    <h2 class="qtext">¿Cuántos pisos tienes actualmente en alquiler?</h2>
+    <div class="opts">
+      <label class="oc" data-v="1" onclick="radio(this,'p1','1')"><span class="ind"></span><span class="ol">Solo 1</span></label>
+      <label class="oc" data-v="2-3" onclick="radio(this,'p1','2-3')"><span class="ind"></span><span class="ol">2–3 pisos</span></label>
+      <label class="oc" data-v="4-10" onclick="radio(this,'p1','4-10')"><span class="ind"></span><span class="ol">4–10 pisos</span></label>
+      <label class="oc" data-v="10+" onclick="radio(this,'p1','10+')"><span class="ind"></span><span class="ol">Más de 10</span></label>
+      <label class="oc" data-v="ninguno" onclick="radio(this,'p1','ninguno')"><span class="ind"></span><span class="ol">Ninguno todavía</span></label>
+    </div>
+    <div class="nav" style="margin-top:20px;">
+      <button class="btn-b" onclick="goBack()">&larr; Atrás</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ P2 — Perfil ═══════════════════════════ -->
+<div class="step" id="step-p2" data-p="16">
+  <div class="qcard">
+    <span class="stag">Perfil · 2 de 3</span>
+    <h2 class="qtext">¿Cómo describes tu perfil como propietario?</h2>
+    <div class="opts">
+      <label class="oc" data-v="particular" onclick="radio(this,'p2','particular')"><span class="ind"></span><span class="ol">Propietario particular<small>El alquiler es un ingreso complementario</small></span></label>
+      <label class="oc" data-v="inversor" onclick="radio(this,'p2','inversor')"><span class="ind"></span><span class="ol">Pequeño inversor<small>Varios pisos como estrategia patrimonial</small></span></label>
+      <label class="oc" data-v="gestor" onclick="radio(this,'p2','gestor')"><span class="ind"></span><span class="ol">Gestor profesional<small>Administro pisos para terceros</small></span></label>
+      <label class="oc" data-v="family" onclick="radio(this,'p2','family')"><span class="ind"></span><span class="ol">Family office / empresa patrimonial</span></label>
+    </div>
+    <div class="nav" style="margin-top:20px;">
+      <button class="btn-b" onclick="goBack()">&larr; Atrás</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ P3 — Cómo gestionas ══════════════════ -->
+<div class="step" id="step-p3" data-p="22">
+  <div class="qcard">
+    <span class="stag">Perfil · 3 de 3</span>
+    <h2 class="qtext">¿Cómo gestionas tus pisos hoy?</h2>
+    <div class="opts">
+      <label class="oc" data-v="solo-excel" onclick="radio(this,'p3','solo-excel')"><span class="ind"></span><span class="ol">Solo: con Excel, WhatsApp o notas<small>Sin ninguna app específica</small></span></label>
+      <label class="oc" data-v="solo-app" onclick="radio(this,'p3','solo-app')"><span class="ind"></span><span class="ol">Solo: uso una app o software<small>Tengo alguna herramienta digital</small></span></label>
+      <label class="oc" data-v="gestor" onclick="radio(this,'p3','gestor')"><span class="ind"></span><span class="ol">Tengo agencia o gestor externo<small>Lo gestiona otra persona o empresa</small></span></label>
+      <label class="oc" data-v="mixto" onclick="radio(this,'p3','mixto')"><span class="ind"></span><span class="ol">Combinación: yo gestiono parte, externalizo otra</span></label>
+    </div>
+    <div class="nav" style="margin-top:20px;">
+      <button class="btn-b" onclick="goBack()">&larr; Atrás</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ RAMA A · A1 — Qué hace el gestor ════ -->
+<div class="step" id="step-a1" data-p="30">
+  <div class="qcard">
+    <span class="stag">Tu gestor</span>
+    <h2 class="qtext">¿Qué hace exactamente tu gestor o agencia?</h2>
+    <p class="qsub">Marca todo lo que aplique.</p>
+    <div class="hint">
+      <span>Selecciona todas las que correspondan</span>
+      <span class="cnt-badge" id="cnt-a1">0</span>
+    </div>
+    <div class="opts" id="chk-a1">
+      <label class="oc chk" data-v="cobros" onclick="chk('a1',this)"><span class="ind"></span><span class="ol">Cobrar la renta y gestionar impagos</span></label>
+      <label class="oc chk" data-v="averias" onclick="chk('a1',this)"><span class="ind"></span><span class="ol">Gestionar averías y buscar técnicos</span></label>
+      <label class="oc chk" data-v="contratos" onclick="chk('a1',this)"><span class="ind"></span><span class="ol">Contratos, alta de inquilinos y documentación</span></label>
+      <label class="oc chk" data-v="fiscal" onclick="chk('a1',this)"><span class="ind"></span><span class="ol">Asesoría fiscal y declaración de renta</span></label>
+      <label class="oc chk" data-v="comun" onclick="chk('a1',this)"><span class="ind"></span><span class="ol">Comunicación con inquilinos</span></label>
+      <label class="oc chk" data-v="todo" onclick="chk('a1',this)"><span class="ind"></span><span class="ol">Todo lo anterior — gestión completa</span></label>
+    </div>
+    <div class="nav">
+      <button class="btn-b" onclick="goBack()">&larr; Atrás</button>
+      <button class="btn-n" id="btn-a1" onclick="goNext('a1')" disabled>Siguiente &rarr;</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ RAMA A · A2 — Precio + satisfacción ══ -->
+<div class="step" id="step-a2" data-p="36">
+  <div class="qcard">
+    <span class="stag">Tu gestor</span>
+    <h2 class="qtext">¿Cuánto pagas y qué tan satisfecho estás?</h2>
+    <span class="sublbl" style="margin-top:18px;">Coste mensual</span>
+    <div class="opts" id="opts-a2p">
+      <label class="oc" data-v="menos30" data-grp="a2p" onclick="optSel('a2','a2p',this,'menos30')" style="padding:10px 15px;"><span class="ind"></span><span class="ol">Menos de 30 €/mes</span></label>
+      <label class="oc" data-v="30-80" data-grp="a2p" onclick="optSel('a2','a2p',this,'30-80')" style="padding:10px 15px;"><span class="ind"></span><span class="ol">30–80 €/mes</span></label>
+      <label class="oc" data-v="80-150" data-grp="a2p" onclick="optSel('a2','a2p',this,'80-150')" style="padding:10px 15px;"><span class="ind"></span><span class="ol">80–150 €/mes</span></label>
+      <label class="oc" data-v="mas150" data-grp="a2p" onclick="optSel('a2','a2p',this,'mas150')" style="padding:10px 15px;"><span class="ind"></span><span class="ol">Más de 150 €/mes</span></label>
+      <label class="oc" data-v="porcentaje" data-grp="a2p" onclick="optSel('a2','a2p',this,'porcentaje')" style="padding:10px 15px;"><span class="ind"></span><span class="ol">Pago un % de la renta (5–10%)</span></label>
+    </div>
+    <div class="div"></div>
+    <span class="sublbl">Satisfacción general con tu gestor</span>
+    <div class="stars-wrap">
+      <div class="stars-row" data-sg="a2">
+        <svg class="star" viewBox="0 0 24 24" data-v="1" onmouseover="starHov('a2',1)" onmouseout="starLeave('a2')" onclick="starClick('a2',1,'a2')"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <svg class="star" viewBox="0 0 24 24" data-v="2" onmouseover="starHov('a2',2)" onmouseout="starLeave('a2')" onclick="starClick('a2',2,'a2')"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <svg class="star" viewBox="0 0 24 24" data-v="3" onmouseover="starHov('a2',3)" onmouseout="starLeave('a2')" onclick="starClick('a2',3,'a2')"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <svg class="star" viewBox="0 0 24 24" data-v="4" onmouseover="starHov('a2',4)" onmouseout="starLeave('a2')" onclick="starClick('a2',4,'a2')"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <svg class="star" viewBox="0 0 24 24" data-v="5" onmouseover="starHov('a2',5)" onmouseout="starLeave('a2')" onclick="starClick('a2',5,'a2')"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+      </div>
+      <div class="star-lbl" id="star-lbl-a2">Toca una estrella</div>
+    </div>
+    <div class="nav">
+      <button class="btn-b" onclick="goBack()">&larr; Atrás</button>
+      <button class="btn-n" id="btn-a2" onclick="goNext('a2')" disabled>Siguiente &rarr;</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ RAMA B · B1 — Por qué no usas app ═══ -->
+<div class="step" id="step-b1" data-p="30">
+  <div class="qcard">
+    <span class="stag">Tu forma de gestionar</span>
+    <h2 class="qtext">¿Por qué no usas ninguna app para gestionar tus pisos?</h2>
+    <div class="opts">
+      <label class="oc" data-v="no-convence" onclick="radio(this,'b1','no-convence')"><span class="ind"></span><span class="ol">No he encontrado una que me convenza</span></label>
+      <label class="oc" data-v="no-sabia" onclick="radio(this,'b1','no-sabia')"><span class="ind"></span><span class="ol">No sabía que existían apps para esto</span></label>
+      <label class="oc" data-v="prefiero" onclick="radio(this,'b1','prefiero')"><span class="ind"></span><span class="ol">Prefiero mis métodos actuales, me funcionan</span></label>
+      <label class="oc" data-v="precio" onclick="radio(this,'b1','precio')"><span class="ind"></span><span class="ol">El precio no justifica el esfuerzo de cambiar</span></label>
+      <label class="oc" data-v="pocos-pisos" onclick="radio(this,'b1','pocos-pisos')"><span class="ind"></span><span class="ol">Solo tengo 1 piso, con Excel me sobra</span></label>
+    </div>
+    <div class="nav" style="margin-top:20px;">
+      <button class="btn-b" onclick="goBack()">&larr; Atrás</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ RAMA C · C1 — Qué app usas ══════════ -->
+<div class="step" id="step-c1" data-p="30">
+  <div class="qcard">
+    <span class="stag">Tu app actual</span>
+    <h2 class="qtext">¿Qué app o software usas actualmente?</h2>
+    <p class="qsub">Escribe el nombre — si no recuerdas bien, aproxima.</p>
+    <input type="text" class="tinp" id="c1-inp" placeholder="Ej: Homming, Rentger, Notion, Excel..." oninput="checkBtn('c1')">
+    <div class="nav">
+      <button class="btn-b" onclick="goBack()">&larr; Atrás</button>
+      <button class="btn-n" id="btn-c1" onclick="goNext('c1')" disabled>Siguiente &rarr;</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ RAMA C · C2 — Nota + qué falta ══════ -->
+<div class="step" id="step-c2" data-p="36">
+  <div class="qcard">
+    <span class="stag">Tu app actual</span>
+    <h2 class="qtext">¿Qué nota le das y qué es lo que más te falta?</h2>
+    <div class="stars-wrap">
+      <div class="stars-row" data-sg="c2">
+        <svg class="star" viewBox="0 0 24 24" onmouseover="starHov('c2',1)" onmouseout="starLeave('c2')" onclick="starClick('c2',1,'c2')"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <svg class="star" viewBox="0 0 24 24" onmouseover="starHov('c2',2)" onmouseout="starLeave('c2')" onclick="starClick('c2',2,'c2')"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <svg class="star" viewBox="0 0 24 24" onmouseover="starHov('c2',3)" onmouseout="starLeave('c2')" onclick="starClick('c2',3,'c2')"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <svg class="star" viewBox="0 0 24 24" onmouseover="starHov('c2',4)" onmouseout="starLeave('c2')" onclick="starClick('c2',4,'c2')"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <svg class="star" viewBox="0 0 24 24" onmouseover="starHov('c2',5)" onmouseout="starLeave('c2')" onclick="starClick('c2',5,'c2')"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+      </div>
+      <div class="star-lbl" id="star-lbl-c2">Toca una estrella</div>
+    </div>
+    <textarea class="tarea" id="c2-txt" placeholder="¿Qué es lo que más te falta o no te gusta? (opcional)" style="margin-top:18px;"></textarea>
+    <div class="nav">
+      <button class="btn-b" onclick="goBack()">&larr; Atrás</button>
+      <button class="btn-n" id="btn-c2" onclick="goNext('c2')" disabled>Siguiente &rarr;</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ P4 — Tiempo al mes ════════════════════ -->
+<div class="step" id="step-p4" data-p="44">
+  <div class="qcard">
+    <span class="stag">Gestión diaria · 1 de 3</span>
+    <h2 class="qtext">¿Cuánto tiempo dedicas al mes a gestionar tus pisos?</h2>
+    <p class="qsub">Cobros, incidencias, papeleo, consultas de inquilinos...</p>
+    <div class="opts">
+      <label class="oc" data-v="menos1h" onclick="radio(this,'p4','menos1h')"><span class="ind"></span><span class="ol">Menos de 1 hora<small>Lo tengo muy automatizado o delegado</small></span></label>
+      <label class="oc" data-v="1-3h" onclick="radio(this,'p4','1-3h')"><span class="ind"></span><span class="ol">1–3 horas<small>Razonable, aunque podría mejorar</small></span></label>
+      <label class="oc" data-v="3-8h" onclick="radio(this,'p4','3-8h')"><span class="ind"></span><span class="ol">3–8 horas<small>Más de lo que me gustaría</small></span></label>
+      <label class="oc" data-v="mas8h" onclick="radio(this,'p4','mas8h')"><span class="ind"></span><span class="ol">Más de 8 horas<small>Me quita demasiado tiempo</small></span></label>
+    </div>
+    <div class="nav" style="margin-top:20px;">
+      <button class="btn-b" onclick="goBack()">&larr; Atrás</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ P5 — Puntos de dolor ══════════════════ -->
+<div class="step" id="step-p5" data-p="50">
+  <div class="qcard">
+    <span class="stag">Gestión diaria · 2 de 3</span>
+    <h2 class="qtext">¿Qué te genera más estrés o te roba más tiempo?</h2>
+    <div class="hint">
+      <span>Elige hasta 3 opciones</span>
+      <span class="cnt-badge" id="cnt-p5">0/3</span>
+    </div>
+    <div class="opts" id="chk-p5">
+      <label class="oc chk" data-v="averias" onclick="chk('p5',this,3)"><span class="ind"></span><span class="ol">Gestionar averías y buscar técnicos<small>Fontanero, electricista, cerrajero...</small></span></label>
+      <label class="oc chk" data-v="cobros" onclick="chk('p5',this,3)"><span class="ind"></span><span class="ol">Seguimiento de cobros e impagos</span></label>
+      <label class="oc chk" data-v="contratos" onclick="chk('p5',this,3)"><span class="ind"></span><span class="ol">Contratos, papeleo y documentación</span></label>
+      <label class="oc chk" data-v="fiscal" onclick="chk('p5',this,3)"><span class="ind"></span><span class="ol">Declaración de renta y temas fiscales</span></label>
+      <label class="oc chk" data-v="whatsapp" onclick="chk('p5',this,3)"><span class="ind"></span><span class="ol">WhatsApp interminable con inquilinos</span></label>
+      <label class="oc chk" data-v="rentabilidad" onclick="chk('p5',this,3)"><span class="ind"></span><span class="ol">No sé cuánto me renta realmente cada piso</span></label>
+      <label class="oc chk" data-v="gastos" onclick="chk('p5',this,3)"><span class="ind"></span><span class="ol">Controlar gastos y facturas</span></label>
+      <label class="oc chk" data-v="otro" onclick="chk('p5',this,3)"><span class="ind"></span><span class="ol">Otro</span></label>
+    </div>
+    <div class="sub-inp" id="otro-p5">
+      <input type="text" class="tinp" id="p5-otro-txt" placeholder="¿Qué otra cosa te genera más estrés?" style="margin-top:0;">
+    </div>
+    <div class="nav">
+      <button class="btn-b" onclick="goBack()">&larr; Atrás</button>
+      <button class="btn-n" id="btn-p5" onclick="goNext('p5')" disabled>Siguiente &rarr;</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ P6 — Cuándo fue la última vez ════════ -->
+<div class="step" id="step-p6" data-p="56">
+  <div class="qcard">
+    <span class="stag">Gestión diaria · 3 de 3</span>
+    <h2 class="qtext">¿Cuándo fue la última vez que gestionar un piso te robó más tiempo del esperado?</h2>
+    <div class="opts">
+      <label class="oc" data-v="esta-semana" onclick="radio(this,'p6','esta-semana')"><span class="ind"></span><span class="ol">Esta semana</span></label>
+      <label class="oc" data-v="este-mes" onclick="radio(this,'p6','este-mes')"><span class="ind"></span><span class="ol">Este mes</span></label>
+      <label class="oc" data-v="2-3-meses" onclick="radio(this,'p6','2-3-meses')"><span class="ind"></span><span class="ol">Hace 2–3 meses</span></label>
+      <label class="oc" data-v="mas6-meses" onclick="radio(this,'p6','mas6-meses')"><span class="ind"></span><span class="ol">Hace más de 6 meses</span></label>
+      <label class="oc" data-v="nunca" onclick="radio(this,'p6','nunca')"><span class="ind"></span><span class="ol">Nunca — lo tengo perfectamente controlado</span></label>
+    </div>
+    <div class="nav" style="margin-top:20px;">
+      <button class="btn-b" onclick="goBack()">&larr; Atrás</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ P7 — Concepto Homie ═══════════════════ -->
+<div class="step" id="step-p7" data-p="62">
+  <div class="qcard">
+    <span class="stag">Valoración del producto · 1 de 3</span>
+    <h2 class="qtext">¿Qué te parece esta idea?</h2>
+    <div class="concept">
+      <span class="concept-tag">Homie — Concepto</span>
+      <p>Una app que desde el móvil <strong>cobra la renta sola</strong>, <strong>gestiona averías</strong> con una red de técnicos verificados sin que tú llames a nadie, <strong>organiza todos tus documentos</strong> y <strong>prepara la declaración de renta automáticamente</strong>. Sin que tú hagas nada.</p>
+    </div>
+    <div class="scale-opts">
+      <div class="soc" data-v="1" onclick="scale(this,'p7','1')"><span class="snum">1</span><span class="stxt">No me interesa<small>Tengo esta necesidad cubierta</small></span></div>
+      <div class="soc" data-v="2" onclick="scale(this,'p7','2')"><span class="snum">2</span><span class="stxt">Me interesa poco</span></div>
+      <div class="soc" data-v="3" onclick="scale(this,'p7','3')"><span class="snum">3</span><span class="stxt">Me interesa<small>Dependería del precio y de cómo funcione</small></span></div>
+      <div class="soc" data-v="4" onclick="scale(this,'p7','4')"><span class="snum">4</span><span class="stxt">Me interesa bastante<small>Lo usaría si el precio es razonable</small></span></div>
+      <div class="soc" data-v="5" onclick="scale(this,'p7','5')"><span class="snum">5</span><span class="stxt">Lo necesito ya<small>¿Dónde me apunto?</small></span></div>
+    </div>
+    <div class="nav" style="margin-top:20px;">
+      <button class="btn-b" onclick="goBack()">&larr; Atrás</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ P8 — Funcionalidad más valiosa ═══════ -->
+<div class="step" id="step-p8" data-p="68">
+  <div class="qcard">
+    <span class="stag">Valoración del producto · 2 de 3</span>
+    <h2 class="qtext">¿Qué funcionalidad te haría decidir usar esta app?</h2>
+    <p class="qsub">Elige solo una — la que más te haría decidir.</p>
+    <div class="opts">
+      <label class="oc" data-v="averias-prov" onclick="radio(this,'p8','averias-prov')"><span class="ind"></span><span class="ol">Gestión automática de averías con red de técnicos verificados</span></label>
+      <label class="oc" data-v="cobros-alertas" onclick="radio(this,'p8','cobros-alertas')"><span class="ind"></span><span class="ol">Cobros automáticos y alertas de impago</span></label>
+      <label class="oc" data-v="declaracion" onclick="radio(this,'p8','declaracion')"><span class="ind"></span><span class="ol">Declaración de renta preparada automáticamente</span></label>
+      <label class="oc" data-v="dashboard" onclick="radio(this,'p8','dashboard')"><span class="ind"></span><span class="ol">Dashboard de rentabilidad real por cada piso</span></label>
+      <label class="oc" data-v="todo-centralizado" onclick="radio(this,'p8','todo-centralizado')"><span class="ind"></span><span class="ol">Todo centralizado en un lugar: docs, facturas, comunicación</span></label>
+      <label class="oc" data-v="portal-inquilino" onclick="radio(this,'p8','portal-inquilino')"><span class="ind"></span><span class="ol">Portal del inquilino para que ellos gestionen sus peticiones</span></label>
+    </div>
+    <div class="nav" style="margin-top:20px;">
+      <button class="btn-b" onclick="goBack()">&larr; Atrás</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ P9 — Cuánto pagarías ══════════════════ -->
+<div class="step" id="step-p9" data-p="74">
+  <div class="qcard">
+    <span class="stag">Valoración del producto · 3 de 3</span>
+    <h2 class="qtext">¿Cuánto pagarías al mes si esto te ahorra el 80% del tiempo de gestión?</h2>
+    <div class="opts">
+      <label class="oc" data-v="nada" onclick="radio(this,'p9','nada')"><span class="ind"></span><span class="ol">Nada — no pagaría por esto</span></label>
+      <label class="oc" data-v="hasta5" onclick="radio(this,'p9','hasta5')"><span class="ind"></span><span class="ol">Hasta 5 €/mes</span></label>
+      <label class="oc" data-v="5-15" onclick="radio(this,'p9','5-15')"><span class="ind"></span><span class="ol">5–15 €/mes</span></label>
+      <label class="oc" data-v="15-30" onclick="radio(this,'p9','15-30')"><span class="ind"></span><span class="ol">15–30 €/mes</span></label>
+      <label class="oc" data-v="30-60" onclick="radio(this,'p9','30-60')"><span class="ind"></span><span class="ol">30–60 €/mes</span></label>
+      <label class="oc" data-v="mas60" onclick="radio(this,'p9','mas60')"><span class="ind"></span><span class="ol">Más de 60 €/mes si realmente funciona</span></label>
+    </div>
+    <div class="nav" style="margin-top:20px;">
+      <button class="btn-b" onclick="goBack()">&larr; Atrás</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ P10 — Frenos ══════════════════════════ -->
+<div class="step" id="step-p10" data-p="80">
+  <div class="qcard">
+    <span class="stag">Para terminar · 1 de 2</span>
+    <h2 class="qtext">¿Qué te frenaría a usar algo así?</h2>
+    <div class="hint">
+      <span>Elige hasta 2 opciones</span>
+      <span class="cnt-badge" id="cnt-p10">0/2</span>
+    </div>
+    <div class="opts" id="chk-p10">
+      <label class="oc chk" data-v="datos-bancarios" onclick="chk('p10',this,2)"><span class="ind"></span><span class="ol">Meter mis datos bancarios en una app desconocida</span></label>
+      <label class="oc chk" data-v="pereza-config" onclick="chk('p10',this,2)"><span class="ind"></span><span class="ol">La pereza del proceso de configuración inicial</span></label>
+      <label class="oc chk" data-v="ya-tengo" onclick="chk('p10',this,2)"><span class="ind"></span><span class="ol">Ya tengo una solución que funciona y no quiero cambiar</span></label>
+      <label class="oc chk" data-v="precio" onclick="chk('p10',this,2)"><span class="ind"></span><span class="ol">El precio — si no es muy económico, no lo veo</span></label>
+      <label class="oc chk" data-v="contacto-humano" onclick="chk('p10',this,2)"><span class="ind"></span><span class="ol">Prefiero el trato humano para estas gestiones</span></label>
+      <label class="oc chk" data-v="dudas-legales" onclick="chk('p10',this,2)"><span class="ind"></span><span class="ol">No confío en que resuelva bien lo legal y fiscal</span></label>
+      <label class="oc chk" data-v="nada" onclick="chk('p10',this,2)"><span class="ind"></span><span class="ol">Nada — lo probaría sin dudar</span></label>
+    </div>
+    <div class="nav">
+      <button class="btn-b" onclick="goBack()">&larr; Atrás</button>
+      <button class="btn-n" id="btn-p10" onclick="goNext('p10')" disabled>Siguiente &rarr;</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ P11 — Pregunta mágica ════════════════ -->
+<div class="step" id="step-p11" data-p="88">
+  <div class="qcard">
+    <span class="stag">Para terminar · 2 de 2</span>
+    <h2 class="qtext">Si pudieras pedirle UNA sola cosa mágica a esta app, ¿qué sería?</h2>
+    <p class="qsub">Sin filtros. Esta es la respuesta más valiosa de todo el cuestionario.</p>
+    <textarea class="tarea" id="p11-inp" placeholder="Escríbelo con tus propias palabras, tal como se te ocurra..." style="min-height:130px;" oninput="checkBtn('p11')"></textarea>
+    <div class="nav">
+      <button class="btn-b" onclick="goBack()">&larr; Atrás</button>
+      <button class="btn-n" id="btn-p11" onclick="goNext('p11')" disabled>Siguiente &rarr;</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ P12 — Beta ════════════════════════════ -->
+<div class="step" id="step-p12" data-p="95">
+  <div class="qcard">
+    <span class="stag">Última pregunta</span>
+    <h2 class="qtext">¿Te gustaría ser de los primeros en probar Homie en beta cerrada, completamente gratis?</h2>
+    <p class="qsub">A cambio solo te pedimos feedback honesto durante 2 meses.</p>
+    <div class="opts">
+      <label class="oc" data-v="si" onclick="radio(this,'p12','si')"><span class="ind"></span><span class="ol">Sí, me apunto — quiero ser beta tester</span></label>
+      <label class="oc" data-v="talvez" onclick="radio(this,'p12','talvez')"><span class="ind"></span><span class="ol">Tal vez — cuéntame más cuando esté listo</span></label>
+      <label class="oc" data-v="no-interes" onclick="radio(this,'p12','no-interes')"><span class="ind"></span><span class="ol">No, pero sigo el proyecto con interés</span></label>
+      <label class="oc" data-v="no" onclick="radio(this,'p12','no')"><span class="ind"></span><span class="ol">No me interesa</span></label>
+    </div>
+    <div class="nav" style="margin-top:20px;">
+      <button class="btn-b" onclick="goBack()">&larr; Atrás</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ EMAIL CAPTURE ════════════════════════ -->
+<div class="step" id="step-email" data-p="98">
+  <div class="qcard">
+    <span class="stag">Casi listo</span>
+    <h2 class="qtext">¿A qué email te avisamos cuando lancemos la beta?</h2>
+    <p class="qsub">Totalmente opcional. Sin spam, sin compromisos. Solo un aviso cuando abramos la beta.</p>
+    <input type="email" class="einp" id="main-email" placeholder="tu@email.com">
+    <div class="nav col" style="margin-top:20px;">
+      <button class="btn-n" onclick="submitWithEmail()">Apuntarme a la beta</button>
+      <button class="btn-skip" onclick="submitWithoutEmail()">Continuar sin email</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ EARLY EXIT — Sin pisos ═══════════════ -->
+<div class="step" id="step-early" data-p="50">
+  <div class="qcard">
+    <span class="stag">Gracias por responder</span>
+    <h2 class="qtext">Todavía no tienes pisos, ¿pero estás pensando en invertir?</h2>
+    <p class="qsub">Homie puede ayudarte a entender la rentabilidad de un piso antes de comprarlo.</p>
+    <div class="opts">
+      <label class="oc" data-v="6m" onclick="radioNoAdv(this,'early','6m')"><span class="ind"></span><span class="ol">Sí, en los próximos 6 meses</span></label>
+      <label class="oc" data-v="1y" onclick="radioNoAdv(this,'early','1y')"><span class="ind"></span><span class="ol">Sí, en el próximo año</span></label>
+      <label class="oc" data-v="explorando" onclick="radioNoAdv(this,'early','explorando')"><span class="ind"></span><span class="ol">Estoy explorando el mercado</span></label>
+      <label class="oc" data-v="no" onclick="radioNoAdv(this,'early','no')"><span class="ind"></span><span class="ol">No por ahora</span></label>
+    </div>
+    <div style="margin-top:20px;">
+      <p style="font-size:14px; color:var(--mid); margin-bottom:10px;">¿Te avisamos cuando lancemos? (opcional)</p>
+      <input type="email" class="einp" id="early-email" placeholder="tu@email.com">
+    </div>
+    <div class="nav" style="margin-top:16px;">
+      <button class="btn-b" onclick="goBack()">&larr; Atrás</button>
+      <button class="btn-n" id="btn-early" onclick="submitEarly()">Enviar</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ THANKS — Con email ════════════════════ -->
+<div class="step" id="step-thanks-yes" data-p="100">
+  <div class="tcard">
+    <div class="ticon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#1A6FBF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    <h2 class="ttitle">Ya estás dentro.</h2>
+    <p class="tsub">
+      Te avisamos en cuanto abramos la beta. Eres de los primeros en probar Homie.
+      <span class="temail" id="thanks-email-lbl"></span>
+    </p>
+    <div class="tpoints" style="margin-top:28px;">
+      <div class="tpoint"><span class="tpoint-dot"></span><span>Acceso gratuito durante 2 meses</span></div>
+      <div class="tpoint"><span class="tpoint-dot"></span><span>Tu feedback da forma al producto final</span></div>
+      <div class="tpoint"><span class="tpoint-dot"></span><span>Sin compromisos — puedes salir cuando quieras</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ THANKS — Sin email ════════════════════ -->
+<div class="step" id="step-thanks-no" data-p="100">
+  <div class="tcard">
+    <div class="ticon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#1A6FBF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+      </svg>
+    </div>
+    <h2 class="ttitle">Gracias por tu tiempo.</h2>
+    <p class="tsub">Tu opinión hace Homie mejor. Seguimos construyendo con datos reales de propietarios como tú.</p>
+  </div>
+</div>
+
+<!-- ══ THANKS — Early exit ══════════════════ -->
+<div class="step" id="step-early-thanks" data-p="100">
+  <div class="tcard">
+    <div class="ticon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#1A6FBF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    <h2 class="ttitle">Gracias.</h2>
+    <p class="tsub">Te avisaremos cuando lancemos. Homie también puede ayudarte a analizar rentabilidad antes de comprar tu primer piso.</p>
+  </div>
+</div>
+
+</div><!-- /card-wrap -->
+</main>
+
+<footer class="ftr">Datos protegidos · RGPD · homie.es</footer>
+
+<!-- ── JAVASCRIPT ─────────────────────────── -->
+<script>
+const S = {
+  step: 'welcome',
+  answers: {},
+  stars: {},
+  rama: null,
+  history: ['welcome']
+};
+
+const PROG = {
+  welcome:0, p1:8, p2:16, p3:22,
+  a1:30, a2:36, b1:30, c1:30, c2:36,
+  p4:44, p5:50, p6:56, p7:62, p8:68, p9:74, p10:80, p11:88, p12:95,
+  email:98, early:50,
+  'thanks-yes':100, 'thanks-no':100, 'early-thanks':100
+};
+
+function showStep(id, back) {
+  const curr = document.querySelector('.step.active');
+  const next = document.getElementById('step-' + id);
+  if (!next) return;
+  S.step = id;
+  setProg(id);
+  if (curr && curr !== next) {
+    curr.classList.add('leaving');
+    setTimeout(() => {
+      curr.classList.remove('active','leaving');
+      next.classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, 190);
+  } else {
+    if (curr) curr.classList.remove('active');
+    next.classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+}
+
+function setProg(id) {
+  const pct = PROG[id] || 0;
+  document.getElementById('pFill').style.width = pct + '%';
+  document.getElementById('pLbl').textContent = pct > 0 ? pct + '% completado' : '';
+}
+
+function nextStep(id) {
+  const a = S.answers;
+  switch(id) {
+    case 'welcome': return 'p1';
+    case 'p1': return a.p1 === 'ninguno' ? 'early' : 'p2';
+    case 'p2': return 'p3';
+    case 'p3':
+      if (a.p3 === 'solo-app')            { S.rama='C'; return 'c1'; }
+      if (a.p3 === 'solo-excel')          { S.rama='B'; return 'b1'; }
+      S.rama = 'A'; return 'a1';
+    case 'a1': return 'a2';
+    case 'a2': return 'p4';
+    case 'b1': return 'p4';
+    case 'c1': return 'c2';
+    case 'c2': return 'p4';
+    case 'p4': return 'p5';
+    case 'p5': return 'p6';
+    case 'p6': return 'p7';
+    case 'p7': return 'p8';
+    case 'p8': return 'p9';
+    case 'p9': return 'p10';
+    case 'p10': return 'p11';
+    case 'p11': return 'p12';
+    case 'p12':
+      return (a.p12==='si' || a.p12==='talvez') ? 'email' : 'thanks-no';
+    default: return null;
+  }
+}
+
+function pushStep(id) {
+  if (S.history[S.history.length - 1] !== id) S.history.push(id);
+}
+
+function goNext(id) {
+  if (!isValid(id)) return;
+  collectText(id);
+  const nx = nextStep(id);
+  if (nx) { pushStep(nx); showStep(nx); }
+}
+
+function goBack() {
+  if (S.history.length <= 1) return;
+  S.history.pop();
+  showStep(S.history[S.history.length - 1], true);
+}
+
+function isValid(id) {
+  switch(id) {
+    case 'a1':  return (S.answers.a1||[]).length > 0;
+    case 'a2':  return !!(S.answers.a2p && S.stars.a2);
+    case 'c1':  return (document.getElementById('c1-inp').value||'').trim().length > 0;
+    case 'c2':  return !!S.stars.c2;
+    case 'p5':  return (S.answers.p5||[]).length > 0;
+    case 'p10': return (S.answers.p10||[]).length > 0;
+    case 'p11': return (document.getElementById('p11-inp').value||'').trim().length > 0;
+    default:    return true;
+  }
+}
+
+function collectText(id) {
+  const m = {
+    c1:  () => S.answers.c1  = document.getElementById('c1-inp').value.trim(),
+    c2:  () => S.answers.c2_missing = document.getElementById('c2-txt').value.trim(),
+    p11: () => S.answers.p11 = document.getElementById('p11-inp').value.trim()
+  };
+  if (m[id]) m[id]();
+  if (id==='p5' && S.answers.p5?.includes('otro')) {
+    S.answers.p5_otro = document.getElementById('p5-otro-txt').value.trim();
+  }
+}
+
+function checkBtn(id) {
+  const btn = document.getElementById('btn-'+id);
+  if (!btn) return;
+  btn.disabled = !isValid(id);
+}
+
+/* ── RADIO (auto-advance) ── */
+function radio(el, id, val) {
+  document.querySelectorAll('#step-'+id+' .oc').forEach(c => c.classList.remove('sel'));
+  el.classList.add('sel');
+  S.answers[id] = val;
+  setTimeout(() => {
+    const nx = nextStep(id);
+    if (nx) { pushStep(nx); showStep(nx); }
+  }, 320);
+}
+
+/* ── RADIO (no auto-advance, for early exit) ── */
+function radioNoAdv(el, id, val) {
+  document.querySelectorAll('#step-'+id+' .opts .oc').forEach(c => c.classList.remove('sel'));
+  el.classList.add('sel');
+  S.answers[id] = val;
+  const btn = document.getElementById('btn-'+id);
+  if (btn) btn.disabled = false;
+}
+
+/* ── RADIO (manual, inside multi-field step) ── */
+function optSel(stepId, grpId, el, val) {
+  document.querySelectorAll('#opts-'+grpId+' .oc').forEach(c => c.classList.remove('sel'));
+  el.classList.add('sel');
+  S.answers[grpId] = val;
+  checkBtn(stepId);
+}
+
+/* ── SCALE (auto-advance) ── */
+function scale(el, id, val) {
+  document.querySelectorAll('#step-'+id+' .soc').forEach(c => c.classList.remove('sel'));
+  el.classList.add('sel');
+  S.answers[id] = val;
+  setTimeout(() => {
+    const nx = nextStep(id);
+    if (nx) { pushStep(nx); showStep(nx); }
+  }, 320);
+}
+
+/* ── CHECKBOX with max ── */
+function chk(id, el, maxN) {
+  const cont = document.getElementById('chk-'+id);
+  const all  = cont.querySelectorAll('.oc.chk');
+
+  if (el.classList.contains('sel')) {
+    el.classList.remove('sel');
+  } else {
+    const now = cont.querySelectorAll('.oc.chk.sel').length;
+    if (now >= maxN) return;
+    el.classList.add('sel');
+  }
+
+  const nowSel = cont.querySelectorAll('.oc.chk.sel');
+  const cnt = document.getElementById('cnt-'+id);
+  if (cnt) cnt.textContent = maxN != null ? (nowSel.length + '/' + maxN) : nowSel.length;
+
+  all.forEach(c => {
+    if (!c.classList.contains('sel')) {
+      c.classList.toggle('dis', nowSel.length >= maxN);
+    } else {
+      c.classList.remove('dis');
+    }
+  });
+
+  if (el.dataset.v === 'otro') {
+    const oi = document.getElementById('otro-'+id);
+    if (oi) oi.classList.toggle('vis', el.classList.contains('sel'));
+  }
+
+  S.answers[id] = Array.from(nowSel).map(c => c.dataset.v);
+  const btn = document.getElementById('btn-'+id);
+  if (btn) btn.disabled = nowSel.length === 0;
+}
+
+/* ── STARS ── */
+const STAR_LABELS = ['','Muy insatisfecho','Insatisfecho','Neutral','Satisfecho','Muy satisfecho'];
+
+function starHov(grp, val) {
+  document.querySelectorAll('[data-sg="'+grp+'"] .star').forEach((s,i) => {
+    s.classList.toggle('hov', i < val);
+    s.classList.remove('on');
+  });
+}
+
+function starLeave(grp) {
+  const sel = S.stars[grp] || 0;
+  document.querySelectorAll('[data-sg="'+grp+'"] .star').forEach((s,i) => {
+    s.classList.remove('hov');
+    s.classList.toggle('on', i < sel);
+  });
+}
+
+function starClick(grp, val, stepId) {
+  S.stars[grp] = val;
+  document.querySelectorAll('[data-sg="'+grp+'"] .star').forEach((s,i) => {
+    s.classList.remove('hov');
+    s.classList.toggle('on', i < val);
+  });
+  const lbl = document.getElementById('star-lbl-'+grp);
+  if (lbl) lbl.textContent = STAR_LABELS[val] || '';
+  S.answers['star_'+grp] = val;
+  if (stepId) checkBtn(stepId);
+}
+
+/* ── SUBMIT ── */
+async function doSubmit(email) {
+  const payload = {
+    ...S.answers,
+    rama: S.rama || 'B',
+    email: email || '',
+    _subject: 'Homie · Respuesta de validación',
+    timestamp: new Date().toISOString()
+  };
+  ['a1','p5','p10'].forEach(k => {
+    if (Array.isArray(payload[k])) payload[k] = payload[k].join(', ');
+  });
+  try {
+    await fetch('https://formspree.io/f/xbderqzy', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      body: JSON.stringify(payload)
+    });
+  } catch(_) { /* silently continue */ }
+}
+
+async function submitWithEmail() {
+  const email = document.getElementById('main-email').value.trim();
+  await doSubmit(email);
+  if (email) {
+    const lbl = document.getElementById('thanks-email-lbl');
+    if (lbl) lbl.textContent = email;
+  }
+  S.history.push('thanks-yes');
+  showStep('thanks-yes');
+}
+
+async function submitWithoutEmail() {
+  await doSubmit('');
+  S.history.push('thanks-no');
+  showStep('thanks-no');
+}
+
+async function submitEarly() {
+  const email = document.getElementById('early-email').value.trim();
+  await doSubmit(email);
+  S.history.push('early-thanks');
+  showStep('early-thanks');
+}
+</script>
+
+</body>
+</html>
